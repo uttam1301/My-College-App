@@ -1,4 +1,4 @@
-package com.example.giftadmin;
+package com.example.giftadmin.notice;
 
 public class NoticeData {
     String title,image,date,time,key;

@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.giftadmin.faculty.UpdateFaculty;
+import com.example.giftadmin.notice.DeleteNotice;
+import com.example.giftadmin.notice.UploadNotice;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    CardView cvAddNotice;
-    CardView cvGalleryImage;
-    CardView cvAddEbook;
+    CardView cvAddNotice, cvGalleryImage, cvAddEbook, cvFaculty,cvDeleteNotice;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -23,10 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cvAddNotice = findViewById(R.id.cvAddNotice);
         cvGalleryImage = findViewById(R.id.cvGalleryImage);
         cvAddEbook = findViewById(R.id.cvAddEbook);
+        cvFaculty = findViewById(R.id.cvFaculty);
+        cvDeleteNotice = findViewById(R.id.cvDeleteNotice);
 
         cvAddNotice.setOnClickListener(this);
         cvGalleryImage.setOnClickListener(this);
         cvAddEbook.setOnClickListener(this);
+        cvFaculty.setOnClickListener(this);
+        cvDeleteNotice.setOnClickListener(this);
     }
 
     @Override
@@ -39,6 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }else if (view.getId() == R.id.cvAddEbook) {
             Intent intent = new Intent(MainActivity.this, UploadEbook.class);
+            startActivity(intent);
+        }else if (view.getId() == R.id.cvFaculty) {
+            Intent intent = new Intent(MainActivity.this, UpdateFaculty.class);
+            startActivity(intent);
+        }else if (view.getId() == R.id.cvDeleteNotice) {
+            Intent intent = new Intent(MainActivity.this, DeleteNotice.class);
             startActivity(intent);
         }
     }

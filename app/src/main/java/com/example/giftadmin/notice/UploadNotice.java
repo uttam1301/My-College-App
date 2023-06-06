@@ -1,4 +1,4 @@
-package com.example.giftadmin;
+package com.example.giftadmin.notice;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.giftadmin.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -41,7 +41,7 @@ public class UploadNotice extends AppCompatActivity {
     private ImageView imgNotice;
     private EditText etNoticeTitle;
     private Button btnUploadNotice;
-    private DatabaseReference reference;
+    private DatabaseReference reference,dbRef;
     private StorageReference storageReference;
     String downloadUrl = "";
     private ProgressDialog pd;
@@ -115,8 +115,8 @@ public class UploadNotice extends AppCompatActivity {
     }
 
     private void uploadData() {
-        reference = reference.child("Notice");
-        final String uniqueKey = reference.push().getKey();
+        dbRef = reference.child("Notice");
+        final String uniqueKey = dbRef.push().getKey();
 
         String title = etNoticeTitle.getText().toString();
 
@@ -130,7 +130,7 @@ public class UploadNotice extends AppCompatActivity {
 
         NoticeData noticeData = new NoticeData(title,downloadUrl,date,time,uniqueKey);
 
-        reference.child(uniqueKey).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dbRef.child(uniqueKey).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 pd.dismiss();
